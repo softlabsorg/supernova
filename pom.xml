@@ -7,11 +7,11 @@
 
     <groupId>io.github.softlabsorg</groupId>
     <artifactId>supernova</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>supernova</name>
-    <description>no code test automation framework</description>
+    <description>low code test automation framework</description>
     <url>https://github.com/softlabsorg/supernova</url>
 
     <licenses>
@@ -27,7 +27,7 @@
             <id>husan</id>
             <name>Husan Mamamdzada</name>
             <email>Husenmzadee@gmail.com</email>
-            <organization>Softlabsorg</organization>
+            <organization>softlabsorg</organization>
         </developer>
     </developers>
 
