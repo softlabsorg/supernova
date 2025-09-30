@@ -1,4 +1,4 @@
-package domains.api.session;
+package domains.api.context;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

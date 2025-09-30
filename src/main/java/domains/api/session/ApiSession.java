@@ -1,5 +1,6 @@
 package domains.api.session;
 
+import domains.api.context.*;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
@@ -113,4 +114,5 @@ public class ApiSession {
     public void addBasePath(String path) {
         requestContext.addBasePath(path);
     }
+
 }

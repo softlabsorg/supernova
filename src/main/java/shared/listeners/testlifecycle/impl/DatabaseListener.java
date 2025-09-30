@@ -17,6 +17,7 @@ public class DatabaseListener implements TestLifecycleListener {
     @Override
     public void onScenarioStart(Scenario scenario) {
         databaseSession.connectIfNeeded();
+        databaseSession.loadQueriesIfNeeded();
     }
 
     @Override
@@ -37,5 +38,7 @@ public class DatabaseListener implements TestLifecycleListener {
 
     private void closeAtEndOfFeature() {
         databaseSession.closeAllConnections();
+        databaseSession.clearQueryCache();
     }
+
 }

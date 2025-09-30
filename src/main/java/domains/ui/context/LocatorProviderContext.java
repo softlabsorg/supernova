@@ -1,4 +1,4 @@
-package domains.ui.session;
+package domains.ui.context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domains.ui.models.locator.Locator;

@@ -1,10 +1,14 @@
 package domains.database.session;
 
+import domains.database.context.DatabaseConnectionContext;
+import domains.database.context.DatabaseExecutionContext;
+import domains.database.context.SqlQueryProviderContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 @RequiredArgsConstructor
@@ -12,6 +16,7 @@ public class DatabaseSession {
 
     private final DatabaseConnectionContext connectionContext;
     private final DatabaseExecutionContext executionContext;
+    private final SqlQueryProviderContext sqlQueryProviderContext;
 
     private final ThreadLocal<Boolean> dbConnected = ThreadLocal.withInitial(() -> false);
 
@@ -28,14 +33,6 @@ public class DatabaseSession {
         executionContext.clear();
     }
 
-    public void setContext(String dbName, ResultSet resultSet) {
-        executionContext.setContext(dbName, resultSet);
-    }
-
-    public String getCurrentDatabaseName() {
-        return executionContext.getCurrentDatabaseName();
-    }
-
     public ResultSet getCurrentResultSet() {
         return executionContext.getCurrentResultSet();
     }
@@ -43,8 +40,30 @@ public class DatabaseSession {
     public void connectIfNeeded() {
         if (!dbConnected.get()) {
             connectAllDatabases();
+            loadQueriesIfNeeded();
             dbConnected.set(true);
         }
+    }
+
+    public void loadQueriesIfNeeded() {
+        sqlQueryProviderContext.loadQueriesIfNeeded();
+    }
+
+    public void clearQueryCache() {
+        sqlQueryProviderContext.clear();
+    }
+
+    public String getQuery(String queryName) {
+        return sqlQueryProviderContext.getQuery(queryName);
+    }
+
+    public ResultSet executeQuery(String dbName, String query) throws SQLException {
+        Connection conn = getConnection(dbName);
+        return executionContext.executeQuery(conn, dbName, query);
+    }
+
+    public void storeResult(String dbName, ResultSet rs) {
+        executionContext.setContext(dbName, rs);
     }
 
 }
