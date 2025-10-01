@@ -1,0 +1,37 @@
+package shared.listeners.testlifecycle.impl;
+
+
+import domains.ui.session.UiSession;
+import io.cucumber.java.Scenario;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import shared.listeners.testlifecycle.TestLifecycleListener;
+
+@Component
+@RequiredArgsConstructor
+public class LocatorLoadListener implements TestLifecycleListener {
+
+    private final UiSession uiSession;
+
+    @Override
+    public void onScenarioStart(Scenario scenario) {
+        String featureName = extractFeatureName(scenario);
+        uiSession.loadFeatureLocatorsIfNeeded(featureName);
+        uiSession.getDriverServiceContext().initializeTagsOnce(scenario.getSourceTagNames());
+    }
+
+    @Override
+    public void onScenarioEnd(Scenario scenario) {
+    }
+
+    private String extractFeatureName(Scenario scenario) {
+        try {
+            String uri = scenario.getUri().toString();
+            String fileName = uri.substring(uri.lastIndexOf("/") + 1);
+            return fileName.replace(".feature", "");
+        } catch (Exception e) {
+            System.err.println("Unable to extract feature name: " + e.getMessage());
+            return "unknown-feature";
+        }
+    }
+}
