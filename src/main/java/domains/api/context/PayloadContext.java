@@ -1,4 +1,4 @@
-package domains.api.session;
+package domains.api.context;
 
 import org.springframework.stereotype.Component;
 

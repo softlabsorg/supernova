@@ -7,7 +7,7 @@
 
     <groupId>io.github.softlabsorg</groupId>
     <artifactId>supernova</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
 
     <name>supernova</name>
@@ -97,6 +97,11 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>0.6.2</version>
         </dependency>
 
         <!-- Spring Framework -->

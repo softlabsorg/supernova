@@ -1,6 +1,8 @@
 package domains.ui.session;
 
 import domains.ui.models.locator.Locator;
+import domains.ui.context.DriverServiceContext;
+import domains.ui.context.LocatorProviderContext;
 import domains.ui.utils.PlatformIdentifier;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

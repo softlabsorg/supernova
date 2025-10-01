@@ -1,4 +1,4 @@
-package domains.database.session;
+package domains.database.context;
 
 import domains.database.models.DatabaseConnection;
 import lombok.RequiredArgsConstructor;

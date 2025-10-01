@@ -1,13 +1,12 @@
 package stepdefinitions.database;
 
 import domains.database.session.DatabaseSession;
+import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.When;
 import lombok.RequiredArgsConstructor;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 @RequiredArgsConstructor
 public class DatabaseQueryExecutionSteps {
@@ -17,36 +16,47 @@ public class DatabaseQueryExecutionSteps {
     /**
      * Executes a SQL query against the specified database.
      * <p>
-     * - If the query produces a {@link ResultSet} (e.g., SELECT), the result set is stored
-     *   in the {@link DatabaseSession} context for later assertions.
-     * - If the query is an update (INSERT, UPDATE, DELETE), the affected row count is logged
-     *   and the context is set to {@code null}.
+     * Supports multi-line queries using Cucumber DocString.
      *
-     * <p><b>Examples:</b></p>
+     * <p><b>Example:</b></p>
      * <pre>{@code
-     * When execute query "SELECT * FROM users" on database "mainDb"
-     * When execute query "UPDATE users SET active = false WHERE id = 1" on database "auditDb"
+     * When execute query on database "test_db"
+     * """
+     *   SELECT *
+     *   FROM users
+     *   WHERE active = true
+     * """
      * }</pre>
      *
-     * @param query  the SQL query to execute (e.g. SELECT, INSERT, UPDATE, DELETE)
-     * @param dbName the database identifier (as managed by {@link DatabaseSession})
+     * @param dbName    the database identifier (as managed by {@link DatabaseSession})
+     * @param docString the SQL query block
      * @throws SQLException if execution fails
      */
-    @When("execute query {string} on database {string}")
-    public void executeQueryOnDatabaseUpper(String query, String dbName) throws SQLException {
-        Connection connection = databaseSession.getConnection(dbName);
-        Statement statement = connection.createStatement();
+    @When("execute query on database {string}")
+    public void executeQueryOnDatabase(String dbName, DocString docString) throws SQLException {
+        ResultSet rs = databaseSession.executeQuery(dbName, docString.getContent());
+        databaseSession.storeResult(dbName, rs);
+    }
 
-        boolean hasResultSet = statement.execute(query);
-
-        if (hasResultSet) {
-            ResultSet resultSet = statement.getResultSet();
-            databaseSession.setContext(dbName, resultSet);
-        } else {
-            int updateCount = statement.getUpdateCount();
-            System.out.printf("Query executed on [%s]. Affected rows: %d%n", dbName, updateCount);
-            databaseSession.setContext(dbName, null);
-        }
+    /**
+     * Executes a pre-registered SQL query by name on the specified database.
+     * <p>
+     * Queries are resolved from the query registry managed by {@link DatabaseSession}.
+     *
+     * <p><b>Example:</b></p>
+     * <pre>{@code
+     * When execute sql "delete_user_by_email" on database "test_db"
+     * }</pre>
+     *
+     * @param queryName the identifier of the SQL query in registry
+     * @param dbName    the database identifier (as managed by {@link DatabaseSession})
+     * @throws SQLException if execution fails
+     */
+    @When("execute sql {string} on database {string}")
+    public void executeSqlFromRegistry(String queryName, String dbName) throws SQLException {
+        String query = databaseSession.getQuery(queryName);
+        ResultSet rs = databaseSession.executeQuery(dbName, query);
+        databaseSession.storeResult(dbName, rs);
     }
 
 }

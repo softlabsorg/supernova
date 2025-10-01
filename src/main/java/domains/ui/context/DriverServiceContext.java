@@ -1,4 +1,4 @@
-package domains.ui.session;
+package domains.ui.context;
 
 import domains.ui.initializers.DriverInitializer;
 import lombok.RequiredArgsConstructor;
