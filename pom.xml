@@ -7,7 +7,7 @@
 
     <groupId>io.github.softlabsorg</groupId>
     <artifactId>supernova</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
 
     <name>supernova</name>
@@ -25,8 +25,14 @@
     <developers>
         <developer>
             <id>husan</id>
-            <name>Husan Mamamdzada</name>
+            <name>Husan Mammadzada</name>
             <email>Husenmzadee@gmail.com</email>
+            <organization>softlabsorg</organization>
+        </developer>
+        <developer>
+            <id>maqa</id>
+            <name>Mahammad Agayev</name>
+            <email>mehemmedagayevi01@gmail.com</email>
             <organization>softlabsorg</organization>
         </developer>
     </developers>
@@ -285,9 +291,8 @@
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>
-                    <!-- İlk dəfə manual Publish etmək üçün bunları əlavə ETMƏ -->
-                    <!-- <autoPublish>true</autoPublish>
-                         <waitUntil>published</waitUntil> -->
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>published</waitUntil>
                 </configuration>
             </plugin>
         </plugins>

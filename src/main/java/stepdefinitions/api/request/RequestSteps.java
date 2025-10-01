@@ -6,6 +6,10 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.RequiredArgsConstructor;
 
+import static shared.utils.CurlCommandGenerator.generateCurlCommand;
+import static shared.utils.LoggingToExtentReport.logResponse;
+import static shared.utils.LoggingToExtentReport.logSentText;
+
 @RequiredArgsConstructor
 public class RequestSteps {
 
@@ -26,8 +30,10 @@ public class RequestSteps {
     @Given("send {string} request")
     public void sendRequest(String method) {
         RequestSpecification request = session.getRequest();
+        logSentText(generateCurlCommand(request));
         Response response = sendRequestInternal(method, request);
         session.setResponse(response);
+        logResponse(response);
         session.killRequest();
     }
 
@@ -53,7 +59,9 @@ public class RequestSteps {
         }
 
         RequestSpecification request = session.getRequest();
+        logSentText(generateCurlCommand(request));
         Response response = sendRequestInternal(method, request);
+        logResponse(response);
         session.setResponse(response);
         session.killRequest();
     }
