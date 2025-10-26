@@ -1,6 +1,5 @@
-package domains.ui.engine.interaction;
+package domains.ui.engine.action;
 
-import domains.ui.engine.wait.Waiter;
 import domains.ui.models.locator.Locator;
 import domains.ui.session.UiSession;
 import domains.ui.utils.LocatorTransformer;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Clicker {
-
-    private static final int DEFAULT_WAIT_SECONDS = 10;
 
     private final UiSession session;
     private final Waiter waiter;
@@ -28,22 +25,13 @@ public class Clicker {
         click(by, locator.getWaitTime());
     }
 
-    public void click(By by, int waitTime) {
+    public void click(By by, int... waitTime) {
         waiter.untilClickable(by, waitTime);
         WebElement element = session.getDriver().findElement(by);
         click(element);
     }
 
-    public void click(By by) {
-        click(by, DEFAULT_WAIT_SECONDS);
-    }
-
-    public void click(WebElement element) {
-        click(element, DEFAULT_WAIT_SECONDS);
-    }
-
-    public void click(WebElement element, int waitTime) {
-        waiter.untilClickable(element, waitTime);
+    private void click(WebElement element) {
         try {
             element.click();
         } catch (Exception e) {

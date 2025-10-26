@@ -6,6 +6,7 @@ import domains.ui.context.LocatorProviderContext;
 import domains.ui.utils.PlatformIdentifier;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
 import shared.utils.ApplicationConfigProvider;
@@ -21,7 +22,6 @@ public class UiSession {
     private final ApplicationConfigProvider applicationConfigProvider;
     private final PlatformIdentifier platformIdentifier;
     private final FirebaseApkDownloader firebaseApkDownloader;
-
     private final ThreadLocal<String> lastFeatureName = new ThreadLocal<>();
 
     public RemoteWebDriver getDriver() {

@@ -5,6 +5,7 @@ import domains.database.models.DatabaseConnection;
 import domains.ui.models.config.Android;
 import domains.ui.models.config.Web;
 import lombok.Data;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -30,6 +31,16 @@ public class ApplicationConfigProvider {
         return globalConfiguration;
     }
 
+    @Bean
+    public Web webConfig() {
+        return get().getWeb();
+    }
+
+    @Bean
+    public Android androidConfig() {
+        return get().getAndroid();
+    }
+
     public String getDefaultDatabaseName() {
         if (get().getDatabases() == null || get().getDatabases().isEmpty()) {
             throw new IllegalStateException("No databases defined in configuration file.");
@@ -38,7 +49,7 @@ public class ApplicationConfigProvider {
     }
 
     private void loadConfig() {
-        List<String> supportedFiles = List.of("configuration.yaml", "configuration.yml", "configuration.json", "configuration.properties");
+        List<String> supportedFiles = List.of("application.yaml", "application.yml", "application.json", "application.properties");
 
         InputStream inputStream = null;
         String fileType = null;
@@ -130,7 +141,4 @@ public class ApplicationConfigProvider {
         }
         return databases;
     }
-
-
-
 }
