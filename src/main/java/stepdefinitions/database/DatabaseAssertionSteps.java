@@ -151,4 +151,5 @@ public class DatabaseAssertionSteps {
         assertTrue("Expected at least one row in the result set",
                 resultSet != null && resultSet.next());
     }
+
 }
