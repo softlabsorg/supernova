@@ -1,6 +1,7 @@
 package shared.listeners.testlifecycle.impl;
 
 
+import domains.ui.context.LocatorProviderContext;
 import domains.ui.session.UiSession;
 import io.cucumber.java.Scenario;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import shared.listeners.testlifecycle.TestLifecycleListener;
 public class LocatorLoadListener implements TestLifecycleListener {
 
     private final UiSession uiSession;
+    private final LocatorProviderContext locatorProviderContext;
 
     @Override
     public void onScenarioStart(Scenario scenario) {
@@ -22,6 +24,7 @@ public class LocatorLoadListener implements TestLifecycleListener {
 
     @Override
     public void onScenarioEnd(Scenario scenario) {
+        locatorProviderContext.reset();
     }
 
     private String extractFeatureName(Scenario scenario) {
