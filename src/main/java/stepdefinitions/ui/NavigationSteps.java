@@ -9,13 +9,13 @@ public class NavigationSteps {
 
     private final Navigator navigator;
 
-    @Given("navigate to base url")
-    public void navigate() {
-        navigator.navigate();
+    @Given("navigate to {string} url")
+    public void navigate(String baseUrl) {
+        navigator.navigate(baseUrl);
     }
 
-    @Given("navigate to site url with {string} endpoint")
-    public void navigate(String target) {
+    @Given("navigate to {string} url with {string} endpoint")
+    public void navigat(String baseUrl, String target) {
         navigator.navigate(target);
     }
 

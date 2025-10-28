@@ -1,4 +1,4 @@
-package shared.config.framework;
+package shared.config.cucumber;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

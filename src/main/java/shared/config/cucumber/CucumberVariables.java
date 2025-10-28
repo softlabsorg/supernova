@@ -1,4 +1,4 @@
-package shared.config.framework;
+package shared.config.cucumber;
 
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.Status;

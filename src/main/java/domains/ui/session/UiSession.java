@@ -22,7 +22,6 @@ public class UiSession {
     private final ApplicationConfigProvider applicationConfigProvider;
     private final PlatformIdentifier platformIdentifier;
     private final FirebaseApkDownloader firebaseApkDownloader;
-    private final ThreadLocal<String> lastFeatureName = new ThreadLocal<>();
 
     public RemoteWebDriver getDriver() {
         return driverServiceContext.getDriver();
@@ -45,19 +44,5 @@ public class UiSession {
         firebaseApkDownloader.deleteDownloadedApkIfExists();
     }
 
-    public boolean isNewFeature(String featureName) {
-        return !featureName.equals(lastFeatureName.get());
-    }
-
-    public void updateLastFeature(String featureName) {
-        lastFeatureName.set(featureName);
-    }
-
-    public void loadFeatureLocatorsIfNeeded(String featureName) {
-        if (isNewFeature(featureName)) {
-            loadFeatureLocators(featureName);
-            updateLastFeature(featureName);
-        }
-    }
 
 }

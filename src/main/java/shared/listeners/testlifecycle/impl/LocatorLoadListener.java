@@ -18,7 +18,7 @@ public class LocatorLoadListener implements TestLifecycleListener {
     @Override
     public void onScenarioStart(Scenario scenario) {
         String featureName = extractFeatureName(scenario);
-        uiSession.loadFeatureLocatorsIfNeeded(featureName);
+        uiSession.loadFeatureLocators(featureName);
         uiSession.getDriverServiceContext().initializeTagsOnce(scenario.getSourceTagNames());
     }
 

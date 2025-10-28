@@ -1,4 +1,4 @@
-package shared.config.framework;
+package shared.config.spring;
 
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.test.context.ContextConfiguration;
