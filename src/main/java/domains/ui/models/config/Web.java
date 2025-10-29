@@ -1,19 +1,23 @@
 package domains.ui.models.config;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Data
 public class Web {
+
     private String browser;
-    private boolean showBrowser = true;
-    private int implicitWait = 10;
-    private int pageLoadTimeout = 30;
-    private int scriptTimeout = 30;
-    private boolean deleteAllCookies = false;
-    private boolean maximize = true;
+    private boolean showBrowser;
+    private int implicitWait;
+    private int pageLoadTimeout;
+    private int scriptTimeout;
+    private boolean deleteAllCookies;
+    private boolean maximize;
     private String windowSize;
-    private boolean clearBrowserCache = false;
-    private boolean disableNotifications = true;
-    private boolean disablePopupBlocking = true;
-    private boolean disableGpu = true;
+    private boolean clearBrowserCache;
+    private boolean disableNotifications;
+    private boolean disablePopupBlocking;
+    private boolean disableGpu;
+
 }

@@ -44,4 +44,35 @@ public class ResponseSchemaSteps {
                         .using(JsonSchemaFactory.byDefault()));
     }
 
+    /**
+     * Validates that the response body matches an inline JSON schema provided directly in the feature file.
+     * <p>
+     * This step is useful when you want to define the JSON schema directly inside the scenario
+     * without using an external schema file.
+     *
+     * <p><b>Example:</b></p>
+     * <pre>{@code
+     * Then response should match inline schema """
+     * {
+     *   "$schema": "http://json-schema.org/draft-07/schema#",
+     *   "type": "object",
+     *   "properties": {
+     *     "id": { "type": "string" },
+     *     "name": { "type": "string" }
+     *   },
+     *   "required": ["id", "name"]
+     * }
+     * """
+     * }</pre>
+     *
+     * @param inlineSchema the JSON schema provided directly in the step definition
+     */
+    @SneakyThrows
+    @Then("response should match inline schema")
+    public void validateResponseMatchesInlineSchema(String inlineSchema) {
+        session.getResponse().then()
+                .body(JsonSchemaValidator.matchesJsonSchema(inlineSchema)
+                        .using(JsonSchemaFactory.byDefault()));
+    }
+
 }

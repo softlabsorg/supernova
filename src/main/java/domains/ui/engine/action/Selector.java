@@ -1,6 +1,5 @@
-package domains.ui.engine.interaction;
+package domains.ui.engine.action;
 
-import domains.ui.engine.wait.Waiter;
 import domains.ui.models.locator.Locator;
 import domains.ui.session.UiSession;
 import domains.ui.utils.LocatorTransformer;
@@ -25,17 +24,14 @@ public class Selector {
     }
 
     public void selectByVisibleText(Locator locator, String text) {
+        waiter.untilPresent(locator);
         By by = LocatorTransformer.toBy(locator);
-        selectByVisibleText(by, text, locator.getWaitTime());
+        selectByVisibleText(by, text);
     }
 
-    public void selectByVisibleText(By by, String text, int waitTime) {
-        waiter.untilPresent(by, waitTime);
+    private void selectByVisibleText(By by, String text) {
         WebElement element = session.getDriver().findElement(by);
         new Select(element).selectByVisibleText(text);
     }
 
-    public void selectByVisibleText(By by, String text) {
-        selectByVisibleText(by, text, DEFAULT_WAIT_SECONDS);
-    }
 }

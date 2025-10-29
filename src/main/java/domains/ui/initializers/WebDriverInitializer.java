@@ -12,7 +12,6 @@ import java.util.UUID;
 public class WebDriverInitializer {
 
     public static RemoteWebDriver initializeWebDriver(Web webConfig) {
-        applyDefaultsIfMissing(webConfig);
         RemoteWebDriver driver = new ChromeDriver(createChromeOptions(webConfig));
         configureTimeouts(driver, webConfig);
         clearCookiesIfNeeded(driver, webConfig);
@@ -20,15 +19,6 @@ public class WebDriverInitializer {
         return driver;
     }
 
-    private static void applyDefaultsIfMissing(Web config) {
-        if (config.getBrowser() == null || config.getBrowser().isBlank()) {
-            config.setBrowser("chrome");
-        }
-
-        if (config.getImplicitWait() == 0) config.setImplicitWait(10);
-        if (config.getPageLoadTimeout() == 0) config.setPageLoadTimeout(30);
-        if (config.getScriptTimeout() == 0) config.setScriptTimeout(30);
-    }
 
     private static ChromeOptions createChromeOptions(Web config) {
         ChromeOptions options = new ChromeOptions();
@@ -84,4 +74,5 @@ public class WebDriverInitializer {
             driver.manage().window().setSize(new Dimension(width, height));
         }
     }
+
 }

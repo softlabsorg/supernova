@@ -7,7 +7,7 @@
 
     <groupId>io.github.softlabsorg</groupId>
     <artifactId>supernova</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <packaging>jar</packaging>
 
     <name>supernova</name>
@@ -51,32 +51,36 @@
 
     <dependencies>
 
-        <!-- Base Java / Logging / IO / Utility -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.38</version>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.17</version>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.5.18</version>
         </dependency>
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.19.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.13.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
@@ -88,11 +92,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>4.4.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -104,19 +110,19 @@
             <version>0.6.2</version>
         </dependency>
 
-        <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>6.2.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>6.2.6</version>
         </dependency>
 
-        <!-- Selenium & Appium -->
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -162,85 +168,90 @@
             <version>7.11.0</version>
         </dependency>
 
-        <!-- REST Assured & JSON Validation -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.4.0</version>
         </dependency>
+
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
             <version>5.4.0</version>
         </dependency>
 
-        <!-- Hamcrest (Required by RestAssured and Cucumber) -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>2.2</version>
         </dependency>
 
-        <!-- PDF & Email -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>3.0.5</version>
         </dependency>
+
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
             <version>1.6.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
 
-        <!-- Other Useful Libraries -->
         <dependency>
             <groupId>net.rcarz</groupId>
             <artifactId>jira-client</artifactId>
             <version>0.5</version>
         </dependency>
+
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>2.4</version>
         </dependency>
+
         <dependency>
             <groupId>com.github.mifmif</groupId>
             <artifactId>generex</artifactId>
             <version>1.0.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.github.curious-odd-man</groupId>
             <artifactId>rgxgen</artifactId>
             <version>2.0</version>
         </dependency>
+
         <dependency>
             <groupId>dev.turingcomplete</groupId>
             <artifactId>kotlin-onetimepassword</artifactId>
             <version>2.4.1</version>
         </dependency>
 
-        <!-- Extent Reports -->
         <dependency>
             <groupId>tech.grasshopper</groupId>
             <artifactId>extentreports-cucumber7-adapter</artifactId>
             <version>1.14.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
             <version>5.1.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
             <version>3.1.1</version>
         </dependency>
+
     </dependencies>
 
     <build>

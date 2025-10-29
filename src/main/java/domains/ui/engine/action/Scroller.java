@@ -1,6 +1,5 @@
-package domains.ui.engine.interaction;
+package domains.ui.engine.action;
 
-import domains.ui.engine.wait.Waiter;
 import domains.ui.models.locator.Locator;
 import domains.ui.session.UiSession;
 import domains.ui.utils.LocatorTransformer;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Scroller {
 
-    private static final int DEFAULT_WAIT_SECONDS = 10;
 
     private final UiSession session;
     private final Waiter waiter;
@@ -28,17 +26,13 @@ public class Scroller {
         scrollTo(by, locator.getWaitTime());
     }
 
-    public void scrollTo(By by, int waitTime) {
-        waiter.untilPresent(by, waitTime);
+    public void scrollTo(By by, int... waitTime) {
+        waiter.untilVisible(by, waitTime);
         WebElement element = session.getDriver().findElement(by);
         scrollTo(element);
     }
 
-    public void scrollTo(By by) {
-        scrollTo(by, DEFAULT_WAIT_SECONDS);
-    }
-
-    public void scrollTo(WebElement element) {
+    private void scrollTo(WebElement element) {
         session.getDriver().executeScript("arguments[0].scrollIntoView(true);", element);
     }
 }

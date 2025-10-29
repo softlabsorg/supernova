@@ -6,6 +6,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
+import shared.utils.LoggingToExtentReport;
 
 import java.util.Map;
 
@@ -190,4 +191,22 @@ public class HeaderSteps {
         session.setHeader(headerName, value);
     }
 
+    /**
+     * Sets a request header with a random UUID value and logs it to Extent Report.
+     * The generated UUID is also stored in the session under the header name.
+     *
+     * <p><b>Example:</b></p>
+     * <pre>{@code
+     * Given set request header "X-Request-Id" to random uuid
+     * }</pre>
+     *
+     * @param headerName the header name
+     */
+    @Given("set request header {string} to random uuid")
+    public void setHeaderRandomUuid(String headerName) {
+        String uuid = java.util.UUID.randomUUID().toString();
+        session.getStoredValues().put(headerName, uuid);
+        session.setHeader(headerName, uuid);
+        LoggingToExtentReport.logSentText(String.format(uuid));
+    }
 }
