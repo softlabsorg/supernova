@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class Finder {
@@ -28,10 +30,22 @@ public class Finder {
         return session.getDriver().findElement(locator);
     }
 
+    public List<WebElement> findElements(String key) {
+        return findElements(session.getLocator(key));
+    }
+
+    public List<WebElement> findElements(Locator locator) {
+        return findElements(LocatorTransformer.toBy(locator), locator.getWaitTime());
+    }
+
+    public List<WebElement> findElements(By locator, int... waitTime) {
+        waiter.untilVisible(locator, waitTime);
+        return session.getDriver().findElements(locator);
+    }
+
     public By findBy(String key) {
         Locator locator = session.getLocator(key);
         return LocatorTransformer.toBy(locator);
     }
-
 
 }
